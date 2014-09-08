@@ -1,5 +1,12 @@
+A slightly modified version of the Esri Basic Viewer that allows a custom AMD module to be plugged in and have it appear as one of the panels.
+
+In the index.html, a custom event will be emitted by the app class called 'found-custom-tool', which will be triggered for any items in the 'tools' with a name that does not match any of the default Viewer tools.  This event includes references to the config for the tool, the curren tool list used by the toolbar, and the toolbar object itself.  These are sufficient for a custom module to add itself to the list of tools by calling the toolbar.createTool(toolConfig,panelSize) function inside of a method that returns a promise object (toolConfig = the object from the list of tools in defaults.js, and panelSize = "large", "medium" or "small").  The toolbar.createTool() method returns the domNode of the content panel that is displayed when the tool is selected - this is where your custom module can display it's controls/content.
+
+If your tool needs to interact with or add content to the map, you can use the map propety of the toolbar object (as it is returned by the found-custom-tool event).
+
 basic-viewer-template
 =====================
+
 *Basic Viewer*  is a configurable application template used to display a web map with a specified set of commonly used tools and options.
 
 ![Screen Shot](https://dl.dropboxusercontent.com/u/24627279/screenshots/Viewer_screenshot.png)
