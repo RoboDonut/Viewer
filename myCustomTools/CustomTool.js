@@ -15,6 +15,7 @@ define([
             this.config = this.app.config;
             this.toolConfig = toolConfig;
             this.toolbar = toolbar;
+            this.map = toolbar.map;
             
             var deferred = new Deferred();
             
