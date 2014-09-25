@@ -9,7 +9,7 @@ function() {
         url: location.protocol + "//utility.arcgisonline.com/ArcGIS/rest/services/Geometry/GeometryServer"
        },
        printTask: {
-        url: location.protocol + "//utility.arcgisonline.com/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task"
+        url: location.protocol + "//10.6.1.68:6080/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task"
        },
        elevationSync:{
          url: location.protocol + "//elevation.arcgis.com/arcgis/rest/services/Tools/ElevationSync/GPServer"
@@ -18,7 +18,7 @@ function() {
         url: location.protocol + "//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer"
        }]
     },
-    queryForOrg: true
+    queryForOrg: false
 };
   
   // could use a has() test to optionally populate some global
