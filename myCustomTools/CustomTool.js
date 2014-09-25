@@ -11,6 +11,7 @@ define([
     {
         startup: function(app,toolConfig,toolbar)
         {
+            var repoBranch = "Draw";
             this.app = app;
             this.config = this.app.config;
             this.toolConfig = toolConfig;
