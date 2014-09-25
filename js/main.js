@@ -53,7 +53,7 @@ Evented, ready, JSON, array, Color, declare, lang, dom, domGeometry, domAttr, do
 
                         }
                     }
-                    this._createWebMap(itemInfo);
+                    this._createWebMap(customWebmap);
 
 
                 }));
