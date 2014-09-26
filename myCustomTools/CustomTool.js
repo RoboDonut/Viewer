@@ -37,44 +37,21 @@ define([
             this.map = toolbar.map;
 
             var deferred = new Deferred();
+
+
             
             // Set the tooltip for the module name...
             this.config.i18n.tooltips[toolConfig.name] = i18n.toolName;
             
             this.tool = toolbar.createTool(toolConfig, "large");
             
-            this.tool.innerHTML = "loading new content??."
+            //this.tool.innerHTML = "loading new content??."
             // application map variable
             var map = app.map;
 
             //create the drawToolbox
             var drawTB = new Draw(this.map);
             drawTB.on("draw-end", addGraphic);
-
-            //create and add the color picker
-            var colorPicker = new ColorPicker({}, "picker1");
-
-            // markerSymbol is used for point and multipoint, see http://raphaeljs.com/icons/#talkq for more examples
-            var markerSymbol = new SimpleMarkerSymbol();
-            markerSymbol.setPath("M16,4.938c-7.732,0-14,4.701-14,10.5c0,1.981,0.741,3.833,2.016,5.414L2,25.272l5.613-1.44c2.339,1.316,5.237,2.106,8.387,2.106c7.732,0,14-4.701,14-10.5S23.732,4.938,16,4.938zM16.868,21.375h-1.969v-1.889h1.969V21.375zM16.772,18.094h-1.777l-0.176-8.083h2.113L16.772,18.094z");
-            markerSymbol.setColor(new Color("#00FFFF")
-            );
-
-            // lineSymbol used for freehand polyline, polyline and line.
-            var lineSymbol = new SimpleLineSymbol(
-                SimpleLineSymbol.STYLE_SOLID,
-                new Color([255,0,0]), 10
-            );
-
-            // fill symbol used for extent, polygon and freehand polygon, use a picture fill symbol
-            // the images folder contains additional fill images, other options: sand.png, swamp.png or stiple.png
-            var fillSymbol = new SimpleFillSymbol(
-                SimpleFillSymbol.STYLE_DIAGONAL_CROSS,
-                new SimpleLineSymbol(
-                    SimpleLineSymbol.STYLE_SOLID,
-                    new Color([255,0,0]), 10),
-                new Color('#000')
-            );
 
             // create buttons and add them to the tool
             //point
@@ -101,6 +78,59 @@ define([
             freePolyBtn.id ="FreehandPolygon"
             freePolyBtn.appendChild(freePolyBtnText);
             this.tool.appendChild(freePolyBtn);
+
+            //create and add the line and fill color pickers
+            //line color div
+            var lineColorDiv = document.createElement('div');
+            lineColorDiv.id="colorDiv";
+            lineColorDiv.innerHTML="Select Line Color: ";
+            this.tool.appendChild(lineColorDiv)
+            //line color Picker
+            var lineColorPicker = document.createElement('input');
+            lineColorPicker.id="lineColorPicker";
+            lineColorPicker.className = "color";
+            lineColorPicker.value="#F6546A";
+            lineColorDiv.appendChild(lineColorPicker)
+            //fill color div
+            var fillColorDiv = document.createElement('div');
+            fillColorDiv.id="colorDiv";
+            fillColorDiv.innerHTML="Select Fill Color: ";
+            this.tool.appendChild(fillColorDiv);
+            //fill color Picker
+            var fillColorPicker = document.createElement('input');
+            fillColorPicker.id="fillColorPicker";
+            fillColorPicker.className = "color";
+            fillColorPicker.value ="#F6546A" ;
+            fillColorDiv.appendChild(fillColorPicker);
+
+            //functions to create symbols dynamically
+            //marker
+            function createMarkerSymbol(lineColorFromPicker,fillColorFromPicker){
+                var markerSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 50,
+                    new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+                        new Color(lineColorFromPicker), 1),
+                    new Color(fillColorFromPicker,0.25));
+                return markerSymbol;
+            }
+            //line
+            function createLineSymbol(lineColorFromPicker){
+                var lineSymbol = new SimpleLineSymbol(
+                    SimpleLineSymbol.STYLE_SOLID,
+                    new Color(lineColorFromPicker), 10
+                );
+                return lineSymbol;
+            }
+            //fill
+            function createFillSymbol(lineColorFromPicker, fillColorFromPicker){
+                var fillSymbol = new SimpleFillSymbol(
+                    SimpleFillSymbol.STYLE_SOLID,
+                    new SimpleLineSymbol(
+                        SimpleLineSymbol.STYLE_SOLID,
+                        new Color(lineColorFromPicker), 10),
+                    new Color(fillColorFromPicker,.5)
+                );
+                return fillSymbol;
+            }
 
             //button click event handlers for POINT, LINE, POLY, and FREEHAND POLY
             //point
@@ -146,23 +176,19 @@ define([
                 //deactivate the toolbar and clear existing graphics
                 drawTB.deactivate();
                 map.enableMapNavigation();
-
                 // figure out which symbol to use
                 var symbol;
                 if ( evt.geometry.type === "point" || evt.geometry.type === "multipoint") {
-                    symbol = markerSymbol;
+                    symbol = createMarkerSymbol('#'+lineColorPicker.color,'#'+fillColorPicker.color);
                 } else if ( evt.geometry.type === "line" || evt.geometry.type === "polyline") {
-                    symbol = lineSymbol;
+                    symbol = createLineSymbol('#'+lineColorPicker.color);
                 }
                 else {
-                    symbol = fillSymbol;
+                   symbol= createFillSymbol('#'+lineColorPicker.color,'#'+fillColorPicker.color);
                 }
 
                 map.graphics.add(new Graphic(evt.geometry, symbol));
             }
-
-
-
 
             toolbar.activateTool(this.config.activeTool || toolConfig.name);
             
