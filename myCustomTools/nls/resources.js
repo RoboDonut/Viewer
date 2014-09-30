@@ -1,6 +1,6 @@
 ﻿define({
     root: ({
-        toolName: "Sample Custom Tool"
+        toolName: "Draw Tool"
     }),
 	"fr":1
 });
