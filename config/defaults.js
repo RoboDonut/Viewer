@@ -83,7 +83,7 @@ define({
     "bitlyKey": "R_52f84981da0e75b23aea2b3b20cbafbc",
     "helperServices": {
         "geometry": {
-            "url": null
+            "url": location.protocol+"//10.6.1.68:6080/arcgis/rest/services/Utilities/Geometry/GeometryServer"
         },
         "printTask": {
             "url": location.protocol + "//10.6.1.68:6080/arcgis/rest/services/Utilities/PrintingTools/GPServer/Export%20Web%20Map%20Task"
@@ -92,7 +92,7 @@ define({
             "url": null
         },
         "geocode": [{
-            "url": null
+            "url": location.protocol +"//10.6.1.68:6080/arcgis/rest/services/CaneMaps/fields_master_AddressLocator/GeocodeServer"
         }]
     }
 });

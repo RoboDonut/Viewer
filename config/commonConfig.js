@@ -15,7 +15,9 @@ function() {
          url: location.protocol + "//elevation.arcgis.com/arcgis/rest/services/Tools/ElevationSync/GPServer"
        },
        geocode: [{
-        url: location.protocol + "//geocode.arcgis.com/arcgis/rest/services/World/GeocodeServer"
+        url: location.protocol +"//10.6.1.68:6080/arcgis/rest/services/CaneMaps/fields_master_AddressLocator/GeocodeServer",
+        singleLineFieldName: "Single Line Input",
+        placefinding: true
        }]
     },
     queryForOrg: false
