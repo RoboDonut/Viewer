@@ -14,11 +14,11 @@ customWebmap.item = {
 
 customWebmap.itemData = {
     "operationalLayers": [{
-        "url": "http://10.6.1.68:6080/arcgis/rest/services/cane_base_simplemap/MapServer",
+        "url": "http://10.6.1.68:6080/arcgis/rest/services/cane_base_simplemap_v2/MapServer",
         "visibility": true,
         "opacity": 1,
         "title": "Cane Base Map",
-        "itemId": "204d94c9b1374de9a21574c9efa31164",
+        "itemId": "",
         "id":"CaneBaseMap"
     }],
     "baseMap": {
