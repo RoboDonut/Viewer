@@ -150,19 +150,22 @@ define([
             //marker
             function createMarkerSymbol(){
                 var rgbaColor = fillColorToRGBA();
-                var markerSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 50,
+                var markerSymbol = new SimpleMarkerSymbol(SimpleMarkerSymbol.STYLE_CIRCLE, 10,
                     new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
                         new Color('#'+lineColorPicker.color), 1),
                     new Color(rgbaColor));
                 return markerSymbol;
             }
             //line
+           /*//this is a cartographic line symbol to add when the ArcGIS Server print tasks can handle such things
+           new CartographicLineSymbol(
+                CartographicLineSymbol.STYLE_SOLID,
+                new Color('#'+lineColorPicker.color), 5,
+                CartographicLineSymbol.CAP_ROUND,
+                CartographicLineSymbol.JOIN_ROUND, 5)*/
             function createLineSymbol(){
-                var lineSymbol = new CartographicLineSymbol(
-                    CartographicLineSymbol.STYLE_SOLID,
-                    new Color('#'+lineColorPicker.color), 10,
-                    CartographicLineSymbol.CAP_ROUND,
-                    CartographicLineSymbol.JOIN_ROUND, 5);
+                var lineSymbol = new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+                    new Color('#'+lineColorPicker.color), 3);
                 return lineSymbol;
             }
             //fill
@@ -171,11 +174,8 @@ define([
 
                 var fillSymbol = new SimpleFillSymbol(
                     SimpleFillSymbol.STYLE_SOLID,
-                    new CartographicLineSymbol(
-                        CartographicLineSymbol.STYLE_SOLID,
-                        new Color('#'+lineColorPicker.color), 10,
-                        CartographicLineSymbol.CAP_ROUND,
-                        CartographicLineSymbol.JOIN_ROUND, 5),
+                    new SimpleLineSymbol(SimpleLineSymbol.STYLE_SOLID,
+                        new Color('#'+lineColorPicker.color), 3),
                     new Color(rgbaColor)
                 );
                 return fillSymbol;
