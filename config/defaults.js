@@ -60,7 +60,8 @@ define({
         {"name": "print", "enabled": true, "legend": true, "layouts":true, "format":"pdf"},
         {"name": "details", "enabled": true},
         {"name": "share", "enabled": true},
-        {"name": "CustomTool", "enabled": true, "customParameters": {} }
+        {"name": "CustomTool", "enabled": true, "customParameters": {}},
+        {"name": "CustomSearchTool", "enabled": true, "customParameters": {} }
     ], 
     //Set the active tool on the toolbar. Note home and locate can't be the active tool. 
     "activeTool": "legend",
