@@ -1,9 +1,11 @@
+_________________________________________________
+
 ***forked from https://github.com/mgleahy/Viewer, that forked Esri\Viewer. 99.99% of the credit goes to them***
 
 Includes a simple draw tool a logic for adding it and a custom search tool in the Draw tool version.
 
 Additional cofigurations were made to use a non ArcGIS Online map service resource. 
-
+__________________________________________________
 
 A slightly modified version of the Esri Basic Viewer that allows a custom AMD module to be plugged in and have it appear as one of the panels.
 
